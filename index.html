@@ -6,42 +6,54 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script defer src="script.js"></script>
 </head>
 <body>
+    <header class="topnav">
+        <a href="#home" class="active">Logo</a>
+        <div id="myLinks">
+          <a class="menuLink menuLink--hidden" id="loginMenu" href="">Log in</a>
+          <a class="menuLink" id="createMenu" href="">Create new account</a>
+          <a class="menuLink menuLink--hidden" onclick="logout()" id="logoutMenu" href="">Log out</a>
+        </div>
+        <a href="javascript:void(0);" class="icon" onclick="hamMenu()">
+          <i class="fa fa-bars"></i>
+        </a>
+    </header>
     <div class="container">
-        <form class="from form--hidden" id="login">
+        <div class="form" id="login">
             <h1 class="formTitle">Login</h1>
             <div class="formAlert formAlert--error"></div>
             <div class="inputGroup">
-                <input type="text" class="formInput formInput--error" autofocus placeholder="Username">
-                <div class="formInputError"></div>
+                <input type="text" class="formInput formInput--error" id="loginName" autofocus placeholder="Username">
+                <div class="formInputError--success formInputError--error"></div>
             </div>
             <div class="inputGroup">
-                <input type="password" class="formInput formInput--error" autofocus placeholder="Password">
+                <input type="password" class="formInput formInput--error" id="loginPw" autofocus placeholder="Password">
                 <div class="formInputError"></div>
             </div>
-            <button class="formButton" type="submit">Continue</button>
-            <p class="formText">
-                <a href="" id="linkCreateAccount" class="formLink">Create new account</a>
-            </p>
-        </form>
+            <button class="formButton" onclick="check()">Continue</button>
+           
+        </div>
 
-        <form class="from" id="CreateAccount">
+        <div class="form form--hidden" id="createAccount">
             <h1 class="formTitle">Create new account</h1>
             <div class="formAlert formAlert--error"></div>
             <div class="inputGroup">
-                <input type="text" class="formInput formInput--error" autofocus placeholder="Username">
+                <input type="text" class="formInput formInput--error" id="createName" autofocus placeholder="Username">
                 <div class="formInputError"></div>
             </div>
             <div class="inputGroup">
-                <input type="password" class="formInput formInput--error" autofocus placeholder="Password">
+                <input type="password" class="formInput formInput--error" id="createPw" autofocus placeholder="Password">
                 <div class="formInputError"></div>
             </div>
-            <button class="formButton" type="submit">Continue</button>
-            <p class="formText">
-                <a href="" id="linkCreateAccount" class="formLink">Create new account</a>
-            </p>
-        </form>
+            <div class="inputGroup">
+                <input type="password" class="formInput formInput--error" id="createPwCheck" autofocus placeholder="Confirm password">
+                <div class="formInputError"></div>
+            </div>
+            <button class="formButton" onclick="store()">Continue</button>
+        </div>
     </div>
+    <footer><h1>FOOTER</h1></footer>
 </body>
