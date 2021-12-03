@@ -21,13 +21,13 @@
           <i class="fa fa-bars"></i>
         </a>
     </header>
-    <div class="container">
+    <div class="container" id="container">
         <div class="form" id="login">
             <h1 class="formTitle">Login</h1>
             <div class="formAlert formAlert--error"></div>
             <div class="inputGroup">
                 <input type="text" class="formInput formInput--error" id="loginName" autofocus placeholder="Username">
-                <div class="formInputError--success formInputError--error"></div>
+                <div class="formInputError"></div>
             </div>
             <div class="inputGroup">
                 <input type="password" class="formInput formInput--error" id="loginPw" autofocus placeholder="Password">
@@ -41,15 +41,15 @@
             <h1 class="formTitle">Create new account</h1>
             <div class="formAlert formAlert--error"></div>
             <div class="inputGroup">
-                <input type="text" class="formInput formInput--error" id="createName" autofocus placeholder="Username">
+                <input type="text" class="formInputError" id="createName" autofocus placeholder="Username">
                 <div class="formInputError"></div>
             </div>
             <div class="inputGroup">
-                <input type="password" class="formInput formInput--error" id="createPw" autofocus placeholder="Password">
+                <input type="password" class="formInputError" id="createPw" autofocus placeholder="Password">
                 <div class="formInputError"></div>
             </div>
             <div class="inputGroup">
-                <input type="password" class="formInput formInput--error" id="createPwCheck" autofocus placeholder="Confirm password">
+                <input type="password" class="formInputError" id="createPwCheck" autofocus placeholder="Confirm password">
                 <div class="formInputError"></div>
             </div>
             <button class="formButton" onclick="store()">Continue</button>

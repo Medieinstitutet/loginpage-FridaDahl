@@ -12,63 +12,46 @@ const logoutMenu = document.querySelector("#logoutMenu");
 const loginMenu = document.querySelector("#loginMenu");
 const createMenu = document.querySelector("#createMenu");
 
-function hideLoginForm(){
-    loginForm.classList.add("form--hidden");     
-}
 
-function hideCreateAccount(){
-    createAccountForm.classList.add("form--hidden");
-}
 
 function showLoginForm(){
     loginForm.classList.remove("form--hidden");
+    createMenu.classList.remove("menuLink--hidden");
+    createAccountForm.classList.add("form--hidden");
+    loginMenu.classList.add("menuLink--hidden");
+    logoutMenu.classList.add("menuLink--hidden");
 }
 
 function showCreateAccount(){
     createAccountForm.classList.remove("form--hidden");
-}
-
-function hideCreateMenu(){
+    loginForm.classList.add("form--hidden");
     createMenu.classList.add("menuLink--hidden");
-}
-
-function showCreateMenu(){
-    createMenu.classList.remove("menuLink--hidden");
-}
-
-function hideLoginMenu(){
-    loginMenu.classList.add("menuLink--hidden");
-}
-
-function showLoginMenu(){
-    loginMenu.classList.remove("menuLink--hidden");
-}
-
-function hideLogoutMenu(){
     logoutMenu.classList.add("menuLink--hidden");
+    loginMenu.classList.remove("menuLink--hidden");
+    
 }
 
-function showLogoutMenu(){
+function loggedIn(){
+    createAccountForm.classList.add("form--hidden");
+    loginForm.classList.add("form--hidden");  
+    createMenu.classList.add("menuLink--hidden");
+    loginMenu.classList.add("menuLink--hidden");
     logoutMenu.classList.remove("menuLink--hidden");
+  
 }
+
 
   document.addEventListener("DOMContentLoaded", () =>{
       loginMenu.addEventListener("click", e =>{
             e.preventDefault();
-            hideCreateAccount()
             showLoginForm()
-            hideLogoutMenu()
-            hideLoginMenu()
-            showCreateMenu()
+            
       });
 
       createMenu.addEventListener("click", e =>{
         e.preventDefault();
         showCreateAccount()
-        hideLoginForm()
-        hideLogoutMenu()
-        hideCreateMenu()
-        showLoginMenu()
+       
 
       });
 
@@ -84,18 +67,14 @@ function showLogoutMenu(){
       }
     
       if (localStorage.getItem("currentLoggedinUser") !== null){
-        hideCreateMenu()
-        hideLoginMenu()
-        showLogoutMenu()
-        hideLoginForm()
-        hideCreateAccount()
+        loggedIn()
+
       }
       
 });
 
 function setFormMessage(formElement, type, message){
     const messageElement = formElement.querySelector(".formAlert");
-
     messageElement.textContent = message;
     messageElement.classList.remove("formAlert--error", "formAlert--success");
     messageElement.classList.add(`formAlert--${type}`);
@@ -154,11 +133,7 @@ function check(){
         console.log(accounts)
     }
     else if(userPw === userData.upw){
-        hideCreateMenu()
-        hideLoginMenu()
-        showLogoutMenu()
-        hideLoginForm()
-        hideCreateAccount()
+        loggedIn()
         localStorage.setItem("currentLoggedinUser", JSON.stringify(userData))
     }
     else { 
