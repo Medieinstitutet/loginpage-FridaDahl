@@ -2,7 +2,7 @@
 loginpage-FridaDahl created by GitHub Classroom
 
 #Testing
-För att testa den här applikationen. Gå in på [I'm an inline-style link](https://www.google.com).
+För att testa den här applikationen. Gå in [här](https://medieinstitutet.github.io/loginpage-FridaDahl/).
 Det här är de fördefinerade användarna.
 | Användarnamn  | Lösenord      | 
 | ------------- |:-------------:| 
