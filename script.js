@@ -65,7 +65,7 @@ function showCreateAccount(){
     logoutMenu.classList.add("menuLink--hidden");
     loginMenu.classList.remove("menuLink--hidden");
     logoutButton.classList.add("form--hidden");
-
+    setFormMessage(createAccountForm, "error", " ");
     document.getElementById("createName").value = '';
     document.getElementById("createPw").value = '';
     document.getElementById("createPwCheck").value = '';
@@ -85,7 +85,7 @@ function helloUser(){
     currentLoggedIn = JSON.parse(localStorage.getItem("currentLoggedinUser"));
     currentUser = String(currentLoggedIn.uname);
     var h = document.createElement("h1");
-    h.setAttribute("id","helloUser")
+    h.setAttribute("id","helloUser");
     var t = document.createTextNode("Hello, " + currentUser + "!");
     h.appendChild(t);
     document.getElementById("container").prepend(h);
@@ -153,10 +153,10 @@ function check(){
         }
     }
     if (userData === null){
-        setFormMessage(loginForm, "error", "Wrong username")
+        setFormMessage(loginForm, "error", "Wrong username");
     }
     else if(userPw === userData.upw){
-        localStorage.setItem("currentLoggedinUser", JSON.stringify(userData))
+        localStorage.setItem("currentLoggedinUser", JSON.stringify(userData));
         loggedIn()
         
     }
