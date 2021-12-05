@@ -23,36 +23,34 @@
     </header>
     <div class="container" id="container">
         <div class="form" id="login">
-            <h1 class="formTitle">Login</h1>
+            <h1 class="formTitle"><h1>Log in</h1>
             <div class="formAlert formAlert--error"></div>
             <div class="inputGroup">
-                <input type="text" class="formInput formInput--error" id="loginName" autofocus placeholder="Username">
-                <div class="formInputError"></div>
+                <input type="text" class="formInput" id="loginName" autofocus placeholder="Username">
             </div>
             <div class="inputGroup">
-                <input type="password" class="formInput formInput--error" id="loginPw" autofocus placeholder="Password">
-                <div class="formInputError"></div>
+                <input type="password" class="formInput" id="loginPw" autofocus placeholder="Password">
             </div>
             <button class="formButton" onclick="check()">Continue</button>
-           
         </div>
 
         <div class="form form--hidden" id="createAccount">
-            <h1 class="formTitle">Create new account</h1>
-            <div class="formAlert formAlert--error"></div>
+            <h1 class="formTitle"><h1>Create new account</h1>
+            <div class="formAlert formAlert--error formAlert--success"></div>
             <div class="inputGroup">
-                <input type="text" class="formInputError" id="createName" autofocus placeholder="Username">
-                <div class="formInputError"></div>
+                <input type="text" class="formInput" id="createName" autofocus placeholder="Username">
             </div>
             <div class="inputGroup">
-                <input type="password" class="formInputError" id="createPw" autofocus placeholder="Password">
-                <div class="formInputError"></div>
+                <input type="password" class="formInput" id="createPw" autofocus placeholder="Password">
             </div>
             <div class="inputGroup">
-                <input type="password" class="formInputError" id="createPwCheck" autofocus placeholder="Confirm password">
-                <div class="formInputError"></div>
+                <input type="password" class="formInput" id="createPwCheck" autofocus placeholder="Confirm password">
             </div>
             <button class="formButton" onclick="store()">Continue</button>
+        </div>
+
+        <div class="form form--hidden" id="logoutForm">
+            <button class="formButton" onclick="logout()">Log out</button>
         </div>
     </div>
     <footer><h1>FOOTER</h1></footer>

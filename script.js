@@ -11,8 +11,39 @@ const createAccountForm = document.querySelector("#createAccount");
 const logoutMenu = document.querySelector("#logoutMenu");
 const loginMenu = document.querySelector("#loginMenu");
 const createMenu = document.querySelector("#createMenu");
+const logoutButton = document.querySelector("#logoutForm");
 
+document.addEventListener("DOMContentLoaded", () =>{
+    loginMenu.addEventListener("click", e =>{
+          e.preventDefault();
+          showLoginForm()
+          
+    });
 
+    createMenu.addEventListener("click", e =>{
+      e.preventDefault();
+      showCreateAccount()
+     
+
+    });
+
+    if (localStorage.getItem("accounts") === null) {
+        localStorage.setItem("accounts", JSON.stringify([{
+          uname: "janne",
+          upw: "test"
+        },{
+            uname: "frida",
+            upw: "test2"
+        }
+        ]))
+    }
+  
+    if (localStorage.getItem("currentLoggedinUser") !== null){
+      loggedIn()
+
+    }
+    
+});
 
 function showLoginForm(){
     loginForm.classList.remove("form--hidden");
@@ -20,6 +51,11 @@ function showLoginForm(){
     createAccountForm.classList.add("form--hidden");
     loginMenu.classList.add("menuLink--hidden");
     logoutMenu.classList.add("menuLink--hidden");
+    logoutButton.classList.add("form--hidden");
+
+    setFormMessage(loginForm, "error", " ");
+    document.getElementById("loginName").value = '';
+    document.getElementById("loginPw").value = '';
 }
 
 function showCreateAccount(){
@@ -28,7 +64,11 @@ function showCreateAccount(){
     createMenu.classList.add("menuLink--hidden");
     logoutMenu.classList.add("menuLink--hidden");
     loginMenu.classList.remove("menuLink--hidden");
-    
+    logoutButton.classList.add("form--hidden");
+
+    document.getElementById("createName").value = '';
+    document.getElementById("createPw").value = '';
+    document.getElementById("createPwCheck").value = '';
 }
 
 function loggedIn(){
@@ -37,41 +77,19 @@ function loggedIn(){
     createMenu.classList.add("menuLink--hidden");
     loginMenu.classList.add("menuLink--hidden");
     logoutMenu.classList.remove("menuLink--hidden");
-  
+    logoutButton.classList.remove("form--hidden");
+    helloUser()
 }
 
-
-  document.addEventListener("DOMContentLoaded", () =>{
-      loginMenu.addEventListener("click", e =>{
-            e.preventDefault();
-            showLoginForm()
-            
-      });
-
-      createMenu.addEventListener("click", e =>{
-        e.preventDefault();
-        showCreateAccount()
-       
-
-      });
-
-      if (localStorage.getItem("accounts") === null) {
-          localStorage.setItem("accounts", JSON.stringify([{
-            uname: "janne",
-            upw: "test"
-          },{
-              uname: "frida",
-              upw: "test2"
-          }
-          ]))
-      }
-    
-      if (localStorage.getItem("currentLoggedinUser") !== null){
-        loggedIn()
-
-      }
-      
-});
+function helloUser(){
+    currentLoggedIn = JSON.parse(localStorage.getItem("currentLoggedinUser"));
+    currentUser = String(currentLoggedIn.uname);
+    var h = document.createElement("h1");
+    h.setAttribute("id","helloUser")
+    var t = document.createTextNode("Hello, " + currentUser + "!");
+    h.appendChild(t);
+    document.getElementById("container").prepend(h);
+}
 
 function setFormMessage(formElement, type, message){
     const messageElement = formElement.querySelector(".formAlert");
@@ -88,13 +106,17 @@ function store(){
     var userData = null;
 
     if (name.length < 4) {
-         alert('Username must be 4 characters or longer');
+        setFormMessage(createAccountForm, "error", "Username must be 4 characters or longer");
+        setFormMessage()
     }
+
     else if (pw.length < 4){
-        alert('Password must be 4 characters or longer');
+        setFormMessage(createAccountForm, "error", "Password must be 4 characters or longer");
+        setFormMessage()
     }
     else if (pw != pwCheck){
-        alert('Confirm password must be same as password');
+        setFormMessage(createAccountForm, "error", "Confirm password must be same as password");
+        setFormMessage()
     }
     else{
         for (i = 0 ; i < accounts.length; i++){
@@ -108,10 +130,12 @@ function store(){
             localStorage.setItem("accounts", JSON.stringify(accounts));
             JSON.parse(localStorage.getItem("accounts"))
             console.log(JSON.parse(localStorage.getItem("accounts")))
-            alert('Account created');
+            setFormMessage(createAccountForm, "success", "Auccount created");
+            setFormMessage()
         }
         else {
-            alert ("Username busy");
+            setFormMessage(createAccountForm, "error", "Username busy");
+            setFormMessage()
         }
     }
 }
@@ -129,18 +153,29 @@ function check(){
         }
     }
     if (userData === null){
-        alert("User dosn't exist")
-        console.log(accounts)
+        setFormMessage(loginForm, "error", "Wrong username")
     }
     else if(userPw === userData.upw){
-        loggedIn()
         localStorage.setItem("currentLoggedinUser", JSON.stringify(userData))
+        loggedIn()
+        
     }
     else { 
-        alert("Wrong password")
+        setFormMessage(loginForm, "error", "Wrong password");
+        setFormMessage()
     }
 }
 
 function logout(){
+    setFormMessage(loginForm, "error", " ");
+    var child = document.getElementById("helloUser");
+    var parent = document.getElementById("container");
+    parent.removeChild(child);
+    logoutMenu.addEventListener("click", e =>{
+        e.preventDefault();
+        showLoginForm()   
+  });
     localStorage.removeItem("currentLoggedinUser");
+    showLoginForm()
+
 }

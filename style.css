@@ -129,18 +129,6 @@ form >*:last-child{
     
 }
 
-.formInput--error {
-    color: var(--color-error);
-    border-color: var(--color-error);
-}
-
-.formInputError {
-    margin-top: 0.5rem;
-    font-size: 0.85rem;
-    color: var(--color-error);
-    font-weight: 400;
-}
-
 .formButton {
     width: 100%;
     padding: 1rem 2rem;
