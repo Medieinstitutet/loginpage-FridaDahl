@@ -1,3 +1,4 @@
+/* Hamburgermenyn*/
 function hamMenu() {
     var x = document.getElementById("myLinks");
     if (x.style.display === "block") {
@@ -13,6 +14,7 @@ const loginMenu = document.querySelector("#loginMenu");
 const createMenu = document.querySelector("#createMenu");
 const logoutButton = document.querySelector("#logoutForm");
 
+/*kontrollerar att sidan är har laddat klart, lägger till användare i local storage, kontrollerar om någon är inloggad*/
 document.addEventListener("DOMContentLoaded", () =>{
     loginMenu.addEventListener("click", e =>{
           e.preventDefault();
@@ -44,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () =>{
     }
     
 });
-
+/* visar loginformuläret och döljer annat innehåll, nollställer felmeddelanden samt tömmer inputfields. */
 function showLoginForm(){
     loginForm.classList.remove("form--hidden");
     createMenu.classList.remove("menuLink--hidden");
@@ -58,6 +60,7 @@ function showLoginForm(){
     document.getElementById("loginPw").value = '';
 }
 
+/* visar Create accountformuläret och döljer annat innehåll, nollställer felmeddelanden samt tömmer inputfields. */
 function showCreateAccount(){
     createAccountForm.classList.remove("form--hidden");
     loginForm.classList.add("form--hidden");
@@ -71,6 +74,7 @@ function showCreateAccount(){
     document.getElementById("createPwCheck").value = '';
 }
 
+/* visar inloggat läge och döljer annat innehåll, ändrar hälsningsfras utifrån användarnamn */
 function loggedIn(){
     createAccountForm.classList.add("form--hidden");
     loginForm.classList.add("form--hidden");  
@@ -81,6 +85,7 @@ function loggedIn(){
     helloUser()
 }
 
+/* Skapar personlig hälsning i inloggat läge */
 function helloUser(){
     currentLoggedIn = JSON.parse(localStorage.getItem("currentLoggedinUser"));
     currentUser = String(currentLoggedIn.uname);
@@ -91,6 +96,7 @@ function helloUser(){
     document.getElementById("container").prepend(h);
 }
 
+/* Skapar meddelanden i formuläret */
 function setFormMessage(formElement, type, message){
     const messageElement = formElement.querySelector(".formAlert");
     messageElement.textContent = message;
@@ -98,6 +104,9 @@ function setFormMessage(formElement, type, message){
     messageElement.classList.add(`formAlert--${type}`);
 }
 
+/* Skapar och sparar ner nya användare i localstorage från Create accountformulär. 
+Kontrollerar att pw samt användarnamn är minst 4 tecken, kontrollerar att pw och confirm pw matchar.
+kontrollerar om användarnamnet redan används. */
 function store(){
     var name = document.getElementById("createName").value;
     var pw = document.getElementById("createPw").value;
@@ -140,6 +149,7 @@ function store(){
     }
 }
 
+/* Kontrollerar om användarnamn och pw matchar mot sparade konton i localstorage, visar felmeddelanden om det blir fel */
 function check(){
     var username = document.getElementById("loginName").value;
     var userPw = document.getElementById("loginPw").value;
@@ -166,6 +176,7 @@ function check(){
     }
 }
 
+/* Loggar ut användaren. Nollställer loginformulär, tar bort inloggad användare från localstorage, visar loginformulär*/
 function logout(){
     setFormMessage(loginForm, "error", " ");
     var child = document.getElementById("helloUser");
@@ -177,5 +188,4 @@ function logout(){
   });
     localStorage.removeItem("currentLoggedinUser");
     showLoginForm()
-
 }
